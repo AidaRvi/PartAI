@@ -6,11 +6,14 @@ import {
   Patch,
   Param,
   Delete,
+  Query,
 } from '@nestjs/common';
 import { RuleService } from './rule.service';
 import { CreateRuleDto } from './dto/create-rule.dto';
 import { UpdateRuleDto } from './dto/update-rule.dto';
 import { Rule } from './entities/rule.entity';
+import { PaginationDto } from './dto/pagination.dto';
+import { FindAllOutput } from './types/find-all.type';
 
 @Controller('rule')
 export class RuleController {
@@ -22,8 +25,8 @@ export class RuleController {
   }
 
   @Get()
-  findAll(): Promise<Rule[]> {
-    return this.ruleService.findAll();
+  findAll(@Query() paginationData: PaginationDto): Promise<FindAllOutput> {
+    return this.ruleService.findAll(paginationData);
   }
 
   @Get(':id')

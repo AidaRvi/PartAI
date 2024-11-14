@@ -5,6 +5,8 @@ import { Rule } from './entities/rule.entity';
 import { MongoRepository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { ObjectId } from 'mongodb';
+import { PaginationDto } from './dto/pagination.dto';
+import { FindAllOutput } from './types/find-all.type';
 
 @Injectable()
 export class RuleService {
@@ -18,9 +20,14 @@ export class RuleService {
     return result;
   }
 
-  async findAll(): Promise<Rule[]> {
-    const rule = await this.ruleRepository.find();
-    return rule;
+  async findAll(paginationData: PaginationDto): Promise<FindAllOutput> {
+    const skip = (paginationData.page - 1) * paginationData.limit;
+    const [result, total] = await this.ruleRepository.findAndCount({
+      skip,
+      take: paginationData.limit,
+    });
+
+    return { result, total };
   }
 
   async findOne(id: string): Promise<Rule> {
