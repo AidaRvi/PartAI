@@ -6,4 +6,4 @@ import { EventConsumerController } from './event-consumer.controller';
   controllers: [EventConsumerController],
   providers: [],
 })
-export class EventConsumerModule {}
+export class EventsModule {}
