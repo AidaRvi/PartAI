@@ -1,20 +1,24 @@
 import { Inject, Injectable, OnModuleInit } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
+import { EventGeneratorService } from './event-generator.service';
 
 @Injectable()
 export class EventPublisherService implements OnModuleInit {
-  constructor(@Inject('RABBITMQ') private client: ClientProxy) {}
+  constructor(
+    private readonly eventGeneratorService: EventGeneratorService,
+    @Inject('RABBITMQ') private client: ClientProxy,
+  ) {}
 
   async publishMessage() {
-    setInterval(() => {
-      const event = { data: 'salam' };
+    const event = this.eventGeneratorService.generateEvent();
 
-      console.log('Publishing event:', event);
-      this.client.emit<string>('RABBITMQ', JSON.stringify(event));
-    }, 5000);
+    this.client.emit<string>('RABBITMQ', JSON.stringify(event));
+    console.log('Event published:', event);
   }
 
   onModuleInit() {
-    this.publishMessage();
+    setInterval(() => {
+      this.publishMessage();
+    }, 500);
   }
 }
