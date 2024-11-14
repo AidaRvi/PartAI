@@ -5,7 +5,7 @@ import { faker } from '@faker-js/faker';
 export class EventGeneratorService {
   generateEvent() {
     const event = {
-      title: faker.internet.domainName(),
+      name: faker.internet.domainName(),
       value: faker.internet.ipv4(),
     };
     return event;
