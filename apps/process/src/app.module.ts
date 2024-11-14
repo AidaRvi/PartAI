@@ -3,7 +3,9 @@ import { EventsModule } from './event/events.module';
 import { Event } from './event/event.entity';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { RuleModule } from './rule/rule.module';
 import configurations from './config/configurations';
+import { Rule } from './rule/entities/rule.entity';
 
 @Module({
   imports: [
@@ -21,10 +23,11 @@ import configurations from './config/configurations';
         port: configService.get<number>('database.port'),
         database: configService.get<string>('database.name'),
         useUnifiedTopology: true,
-        entities: [Event],
+        entities: [Event, Rule],
         synchronize: true,
       }),
     }),
+    RuleModule,
   ],
   controllers: [],
   providers: [],
