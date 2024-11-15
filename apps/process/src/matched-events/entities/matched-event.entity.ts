@@ -1,8 +1,8 @@
+import { ObjectId } from 'mongodb';
 import {
   Column,
   CreateDateColumn,
   Entity,
-  ObjectId,
   ObjectIdColumn,
   UpdateDateColumn,
 } from 'typeorm';
@@ -10,7 +10,7 @@ import {
 @Entity()
 export class MatchedEvent {
   @ObjectIdColumn()
-  id: ObjectId;
+  id?: ObjectId;
 
   @Column()
   eventId: ObjectId;
@@ -18,9 +18,12 @@ export class MatchedEvent {
   @Column()
   ruleId: ObjectId;
 
+  @Column()
+  agentId: string;
+
   @CreateDateColumn()
-  createdAt: Date;
+  createdAt?: Date;
 
   @UpdateDateColumn()
-  updatedAt: Date;
+  updatedAt?: Date;
 }
