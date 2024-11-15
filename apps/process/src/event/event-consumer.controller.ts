@@ -8,11 +8,10 @@ export class EventConsumerController {
   constructor(private eventService: EventsService) {}
 
   @EventPattern('RABBITMQ')
-  handleMessageCreated(@Payload() data: string) {
-    console.log(`Received event:`);
-    const eventData: EventDataDto = JSON.parse(data);
-    console.log(eventData);
+  eventCosumer(@Payload() data: string) {
+    console.log(`** New event recieved`);
 
-    this.eventService.saveEvents(eventData);
+    const eventData: EventDataDto = JSON.parse(data);
+    this.eventService.saveEventToRedis(eventData);
   }
 }
