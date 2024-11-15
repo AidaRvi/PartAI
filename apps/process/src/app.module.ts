@@ -8,6 +8,7 @@ import configurations from './config/configurations';
 import { Rule } from './rule/entities/rule.entity';
 import { MatchedEventsModule } from './matched-events/matched-events.module';
 import { MatchedEvent } from './matched-events/entities/matched-event.entity';
+import { RedisModule } from './redis/redis.mudule';
 
 @Module({
   imports: [
@@ -29,6 +30,7 @@ import { MatchedEvent } from './matched-events/entities/matched-event.entity';
         synchronize: true,
       }),
     }),
+    RedisModule,
     RuleModule,
     MatchedEventsModule,
   ],
