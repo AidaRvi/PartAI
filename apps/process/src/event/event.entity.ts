@@ -10,20 +10,20 @@ import {
 @Entity()
 export class Event {
   @ObjectIdColumn()
-  id: ObjectId;
+  id?: ObjectId;
 
   @Column({ type: String })
-  name!: string;
+  name: string;
 
   @Column({ type: String })
-  value!: string;
+  value: string;
 
   @Column({ type: String })
-  agentId!: string;
+  agentId: string;
 
-  @CreateDateColumn()
-  createdAt: Date;
+  @CreateDateColumn({ default: new Date() }) // TODO
+  createdAt?: Date;
 
-  @UpdateDateColumn()
-  updatedAt: Date;
+  @UpdateDateColumn({ default: new Date() })
+  updatedAt?: Date;
 }
