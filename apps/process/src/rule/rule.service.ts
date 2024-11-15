@@ -88,6 +88,6 @@ export class RuleService {
     );
 
     await this.redisService.del('rules');
-    this.redisService.set('rules', JSON.stringify(activeRules));
+    this.redisService.set('rules', JSON.stringify(activeRules.result));
   }
 }
