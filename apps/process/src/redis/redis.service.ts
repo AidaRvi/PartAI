@@ -13,8 +13,12 @@ export class RedisService {
     return this.redisClient.rpush(key, value);
   }
 
-  async get(key: string): Promise<string[]> {
+  async getList(key: string): Promise<string[]> {
     return this.redisClient.lrange(key, 0, -1);
+  }
+
+  async get(key: string): Promise<string> {
+    return this.redisClient.get(key);
   }
 
   async set(key: string, value: string): Promise<void> {
