@@ -7,12 +7,17 @@ import { Rule } from 'src/rule/entities/rule.entity';
 import { MongoRepository } from 'typeorm';
 import { MatchedEvent } from './entities/matched-event.entity';
 import { ObjectId } from 'mongodb';
+import { DayRangeDto } from './DTOs/get-timestamps-day-range.dto';
+import { GetTimestampsDto } from './DTOs/get-timestamps.dto';
+import { RuleService } from 'src/rule/rule.service';
 
 @Injectable()
 export class MatchedEventsService {
   constructor(
     @Inject(forwardRef(() => EventsService))
     private readonly eventService: EventsService,
+    @Inject(forwardRef(() => RuleService))
+    private readonly ruleService: RuleService,
     @InjectRepository(MatchedEvent)
     private readonly matchedEventRepository: MongoRepository<MatchedEvent>,
     private readonly redisService: RedisService,
@@ -108,5 +113,49 @@ export class MatchedEventsService {
     }));
 
     this.matchedEventRepository.insertMany(enrichedData);
+  }
+
+  async getTimestampsHandler(
+    ruleId: string,
+    getTimestampsDto: DayRangeDto,
+  ): Promise<GetTimestampsDto> {
+    const rule = await this.ruleService.findOne(ruleId);
+    if (!rule) throw new Error('rule not found');
+
+    const beginDate = getTimestampsDto.beginDate;
+    const endDate = getTimestampsDto.endDate;
+
+    const pipeline = [
+      {
+        $match: {
+          createdAt: { $gte: beginDate, $lte: endDate },
+          ruleId: new ObjectId(ruleId),
+        },
+      },
+      {
+        $project: {
+          agentId: 1,
+          createdAt: 1,
+          _id: 0,
+        },
+      },
+      {
+        $group: {
+          _id: '$agentId',
+          dates: { $push: '$createdAt' },
+        },
+      },
+    ];
+
+    const agentsData = (await this.matchedEventRepository
+      .aggregate(pipeline)
+      .toArray()) as unknown as { _id: string; dates: Date[] }[];
+
+    const agents = agentsData.map((agent) => ({
+      [`${agent._id}`]: agent.dates,
+    }));
+
+    const result = Object.assign({}, ...agents);
+    return { result };
   }
 }

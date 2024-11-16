@@ -4,10 +4,12 @@ import { MatchedEventsController } from './matched-events.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { MatchedEvent } from './entities/matched-event.entity';
 import { EventsModule } from 'src/event/events.module';
+import { RuleModule } from 'src/rule/rule.module';
 
 @Module({
   imports: [
     forwardRef(() => EventsModule),
+    RuleModule,
     TypeOrmModule.forFeature([MatchedEvent]),
   ],
   controllers: [MatchedEventsController],
