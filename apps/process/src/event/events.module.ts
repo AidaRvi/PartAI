@@ -4,6 +4,7 @@ import { EventConsumerController } from './event-consumer.controller';
 import { Event } from './event.entity';
 import { EventsService } from './event.service';
 import { MatchedEventsModule } from 'src/matched-events/matched-events.module';
+import { EventRepository } from './event.repository';
 
 @Module({
   imports: [
@@ -11,7 +12,7 @@ import { MatchedEventsModule } from 'src/matched-events/matched-events.module';
     TypeOrmModule.forFeature([Event]),
   ],
   controllers: [EventConsumerController],
-  providers: [EventsService],
+  providers: [EventsService, EventRepository],
   exports: [EventsService],
 })
 export class EventsModule {}

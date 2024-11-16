@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { DataSource, EntityRepository, MongoRepository } from 'typeorm';
+import { DataSource, MongoRepository } from 'typeorm';
 import { MatchedEvent } from './entities/matched-event.entity';
 import { ObjectId } from 'mongodb';
 import { DayRangeDto } from './DTOs/get-timestamps-day-range.dto';

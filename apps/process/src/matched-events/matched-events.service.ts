@@ -57,7 +57,7 @@ export class MatchedEventsService {
     }
 
     const promisifiedEvents = matchedEventsAndRules.map(async (event) =>
-      this.eventService.getEvent({
+      this.eventService.getEventHandler({
         name: event.eventName,
         value: event.eventValue,
       }),

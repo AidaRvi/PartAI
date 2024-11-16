@@ -1,30 +1,23 @@
 import { forwardRef, Inject, Injectable, OnModuleInit } from '@nestjs/common';
 import { EventDataDto } from './DTOs/event.dto';
-import { InjectRepository } from '@nestjs/typeorm';
-import { MongoRepository } from 'typeorm';
 import { Event } from './event.entity';
 import { RedisService } from 'src/redis/redis.service';
 import { MatchedEventsService } from 'src/matched-events/matched-events.service';
+import { EventRepository } from './event.repository';
 
 @Injectable()
 export class EventsService implements OnModuleInit {
   constructor(
-    @InjectRepository(Event)
-    private readonly eventRepository: MongoRepository<Event>,
+    private readonly eventRepository: EventRepository,
     private readonly redisService: RedisService,
     @Inject(forwardRef(() => MatchedEventsService))
     private readonly matchedEventService: MatchedEventsService,
   ) {}
 
-  async saveEvents(
+  async saveEventsHandler(
     data: Pick<Event, 'agentId' | 'name' | 'value'>[],
   ): Promise<void> {
-    const events = data.map((event) => ({
-      ...event,
-      createdAt: new Date(),
-      updatedAt: new Date(),
-    }));
-    await this.eventRepository.insertMany(events);
+    this.eventRepository.saveEvents(data);
   }
 
   async saveEventToRedis(event: EventDataDto): Promise<void> {
@@ -59,13 +52,12 @@ export class EventsService implements OnModuleInit {
         value: item.event.value,
       }),
     );
-    await this.saveEvents(events);
-
+    await this.saveEventsHandler(events);
     this.matchedEventService.compareEventsHandler(eventsData);
   }
 
-  async getEvent(filter: Pick<Event, 'name' | 'value'>): Promise<Event> {
-    const result = await this.eventRepository.findOne({ where: filter });
+  async getEventHandler(filter: Pick<Event, 'name' | 'value'>): Promise<Event> {
+    const result = await this.eventRepository.getEvent(filter);
     return result;
   }
 }
