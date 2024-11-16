@@ -119,4 +119,23 @@ export class MatchedEventsService {
     const result = Object.assign({}, ...agents);
     return { result };
   }
+
+  async getAgentsHandler(ruleId: string): Promise<GetAgentsDto> {
+    const rule = await this.ruleService.findOne(ruleId);
+    if (!rule) throw new Error('rule not found');
+
+    const agentsData =
+      await this.matchedEventRepository.getAgentsDatesByRule(ruleId);
+
+    const agentsCount = agentsData.map((agentData) => ({
+      agentId: agentData._id,
+      count: agentData.dates.length,
+    }));
+
+    const result = agentsCount
+      .sort((a, b) => b.count - a.count)
+      .map((item) => item.agentId);
+
+    return { result };
+  }
 }

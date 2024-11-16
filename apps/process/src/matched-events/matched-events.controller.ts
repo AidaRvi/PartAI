@@ -3,6 +3,7 @@ import { MatchedEventsService } from './matched-events.service';
 import { DayRangeDto } from './DTOs/get-timestamps-day-range.dto';
 import { GetTimestampsDto } from './DTOs/get-timestamps.dto';
 import { RuleIdDto } from './DTOs/get-timestamps-ruleid.dto';
+import { GetAgentsDto } from './DTOs/get-agents.dto';
 
 @Controller('matched-events')
 export class MatchedEventsController {
@@ -19,6 +20,8 @@ export class MatchedEventsController {
     );
   }
 
-  // @Get('rules/:ruleId/agents')
-  // getAgents() {}
+  @Get('rules/:ruleId/agents')
+  getAgents(@Param() ruleIdDto: RuleIdDto): Promise<GetAgentsDto> {
+    return this.matchedEventsService.getAgentsHandler(ruleIdDto.ruleId);
+  }
 }
