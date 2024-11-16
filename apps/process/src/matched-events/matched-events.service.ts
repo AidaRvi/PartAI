@@ -43,7 +43,10 @@ export class MatchedEventsService {
       return matchedEventsAndRule;
     });
 
-    // TODO: handle no matched
+    if (!matchedEventsAndRules.length) {
+      console.log('===> No new matches');
+      return;
+    }
 
     const promisifiedEvents = matchedEventsAndRules.map(async (event) =>
       this.eventService.getEvent({
@@ -68,17 +71,22 @@ export class MatchedEventsService {
     const eventValueLength = eventData.event.value.length;
     const eventNameLength = eventData.event.name.length;
     const eventFirst3Digit = eventData.event.value.split('.')[0];
-    const eventFirst3DigitSum = [+eventFirst3Digit].reduce(
+    const eventFirst3DigitSum = [...eventFirst3Digit].reduce(
       (sum, digit) => sum + +digit,
       0,
     );
 
-    // TODO: handle undefiend rule proprties
+    const con1 =
+      rule.maxFirst3DigitSum && rule.maxFirst3DigitSum > eventFirst3DigitSum;
+    const con2 = rule.maxNameLength && rule.maxNameLength > eventNameLength;
+    const con3 = rule.minNameLength && rule.minNameLength < eventNameLength;
+    const con4 = rule.valueLength && rule.valueLength == eventValueLength;
+
     if (
-      rule.maxFirst3DigitSum > eventFirst3DigitSum &&
-      rule.maxNameLength > eventNameLength &&
-      rule.minNameLength < eventNameLength &&
-      rule.valueLength == eventValueLength
+      (con1 === undefined || con1) &&
+      (con2 === undefined || con2) &&
+      (con3 === undefined || con3) &&
+      (con4 === undefined || con4)
     )
       return true;
     else return false;
