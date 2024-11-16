@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateRuleDto } from './dto/create-rule.dto';
 import { UpdateRuleDto } from './dto/update-rule.dto';
 import { Rule } from './entities/rule.entity';
@@ -41,7 +41,7 @@ export class RuleService {
 
   async updateHandler(id: string, updateRuleDto: UpdateRuleDto): Promise<Rule> {
     const rule = await this.findOneHandler(id);
-    if (!rule) throw new Error('rule not found');
+    if (!rule) throw new NotFoundException('rule not found');
 
     const newRule = await this.ruleRepository.update(id, updateRuleDto);
 
@@ -52,7 +52,7 @@ export class RuleService {
 
   async removeHandler(id: string): Promise<void> {
     const rule = await this.findOneHandler(id);
-    if (!rule) throw new Error('rule not found');
+    if (!rule) throw new NotFoundException('rule not found');
 
     await this.ruleRepository.update(id, { isActive: false });
 

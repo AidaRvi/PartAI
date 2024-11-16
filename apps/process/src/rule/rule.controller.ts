@@ -20,30 +20,57 @@ export class RuleController {
   constructor(private readonly ruleService: RuleService) {}
 
   @Post()
-  create(@Body() createRuleDto: CreateRuleDto): Promise<Rule> {
-    return this.ruleService.createHandler(createRuleDto);
+  async create(@Body() createRuleDto: CreateRuleDto): Promise<Rule> {
+    try {
+      const result = await this.ruleService.createHandler(createRuleDto);
+      return result;
+    } catch (e) {
+      throw e;
+    }
   }
 
   @Get()
-  findAll(@Query() paginationData: PaginationDto): Promise<FindAllOutput> {
-    return this.ruleService.findAllHandler(paginationData);
+  async findAll(
+    @Query() paginationData: PaginationDto,
+  ): Promise<FindAllOutput> {
+    try {
+      const result = await this.ruleService.findAllHandler(paginationData);
+      return result;
+    } catch (e) {
+      throw e;
+    }
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string): Promise<Rule> {
-    return this.ruleService.findOneHandler(id);
+  async findOne(@Param('id') id: string): Promise<Rule> {
+    try {
+      const result = await this.ruleService.findOneHandler(id);
+      return result;
+    } catch (e) {
+      throw e;
+    }
   }
 
   @Patch(':id')
-  update(
+  async update(
     @Param('id') id: string,
     @Body() updateRuleDto: UpdateRuleDto,
   ): Promise<Rule> {
-    return this.ruleService.updateHandler(id, updateRuleDto);
+    try {
+      const result = await this.ruleService.updateHandler(id, updateRuleDto);
+      return result;
+    } catch (e) {
+      throw e;
+    }
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string): Promise<void> {
-    return this.ruleService.removeHandler(id);
+  async remove(@Param('id') id: string): Promise<void> {
+    try {
+      const result = await this.ruleService.removeHandler(id);
+      return result;
+    } catch (e) {
+      throw e;
+    }
   }
 }
