@@ -1,0 +1,593 @@
+{
+	"info": {
+		"_postman_id": "d5f6985f-e72f-44ab-b909-fd84c23b231c",
+		"name": "PartAI",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "34265123",
+		"_collection_link": "https://red-flare-336260.postman.co/workspace/Eyenomic~06d6da51-9464-4c86-ae65-3f37c27fa17f/collection/34265123-d5f6985f-e72f-44ab-b909-fd84c23b231c?action=share&source=collection_link&creator=34265123"
+	},
+	"item": [
+		{
+			"name": "Rule",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/rule/6738c214c4e5533bd7709826",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"rule",
+						"6738c214c4e5533bd7709826"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get all rules",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/rule?page=2&limit=3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"rule"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "2"
+								},
+								{
+									"key": "limit",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "644"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"284-BjVEI6fxWaizDtfR2YMvGaNFn8o\""
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 16 Nov 2024 17:59:53 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"result\": [\n        {\n            \"isActive\": false,\n            \"id\": \"6738c214c4e5533bd7709826\",\n            \"maxNameLength\": 25,\n            \"minNameLength\": 10,\n            \"valueLength\": 114,\n            \"maxFirst3DigitSum\": 10,\n            \"createdAt\": \"2024-11-16T16:02:28.440Z\",\n            \"updatedAt\": \"2024-11-16T16:02:28.440Z\"\n        },\n        {\n            \"isActive\": false,\n            \"id\": \"6738c21ec4e5533bd7709827\",\n            \"maxNameLength\": 25,\n            \"minNameLength\": 15,\n            \"valueLength\": 14,\n            \"maxFirst3DigitSum\": 10,\n            \"createdAt\": \"2024-11-16T16:02:38.738Z\",\n            \"updatedAt\": \"2024-11-16T16:02:38.738Z\"\n        },\n        {\n            \"isActive\": false,\n            \"id\": \"6738c7c0f52442e197db58c2\",\n            \"maxNameLength\": 25,\n            \"minNameLength\": 15,\n            \"valueLength\": 13,\n            \"maxFirst3DigitSum\": 10,\n            \"createdAt\": \"2024-11-16T16:26:40.434Z\",\n            \"updatedAt\": \"2024-11-16T16:26:40.434Z\"\n        }\n    ],\n    \"total\": 8\n}"
+				},
+				{
+					"name": "Get one rule",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/rule/6738c214c4e5533bd7709826",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"rule",
+								"6738c214c4e5533bd7709826"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "207"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"cf-YN3IQ/3PHTeTvpzR82z7b/gIJsQ\""
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 16 Nov 2024 18:00:31 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"isActive\": false,\n    \"id\": \"6738c214c4e5533bd7709826\",\n    \"maxNameLength\": 25,\n    \"minNameLength\": 10,\n    \"valueLength\": 114,\n    \"maxFirst3DigitSum\": 10,\n    \"createdAt\": \"2024-11-16T16:02:28.440Z\",\n    \"updatedAt\": \"2024-11-16T16:02:28.440Z\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Rule",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/rule/6738c7c1f52442e197db58c3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"rule",
+						"6738c7c1f52442e197db58c3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Rule",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"maxFirst3DigitSum\": 10\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/rule/6738c1d4c4e5533bd7709823",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"rule",
+						"6738c1d4c4e5533bd7709823"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Update a rule",
+					"originalRequest": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"maxFirst3DigitSum\": 10\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/rule/6738c1d4c4e5533bd7709823",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"rule",
+								"6738c1d4c4e5533bd7709823"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "190"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"be-MsdplAwKTL3vlMCodvgssUb1n2s\""
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 16 Nov 2024 18:02:40 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"_id\": \"6738c1d4c4e5533bd7709823\",\n    \"isActive\": true,\n    \"maxNameLength\": 30,\n    \"minNameLength\": 10,\n    \"maxFirst3DigitSum\": 10,\n    \"createdAt\": \"2024-11-16T16:01:24.552Z\",\n    \"updatedAt\": \"2024-11-16T16:01:24.552Z\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Rule",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"maxNameLength\": 27,\r\n    \"minNameLength\": 15\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/rule",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"rule"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Create rule with all properties",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"maxNameLength\": 27,\r\n    \"minNameLength\": 15,\r\n    \"maxFirst3DigitSum\": 9,\r\n    \"valueLength\": 13\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/rule",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"rule"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "204"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"cc-kyObuttUZLC/Sg/xtALE0y+iPQk\""
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 16 Nov 2024 16:48:50 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"isActive\": true,\n    \"maxNameLength\": 27,\n    \"minNameLength\": 15,\n    \"valueLength\": 13,\n    \"maxFirst3DigitSum\": 9,\n    \"createdAt\": \"2024-11-16T16:48:50.413Z\",\n    \"updatedAt\": \"2024-11-16T16:48:50.413Z\",\n    \"id\": \"6738ccf2877dde0229aa533b\"\n}"
+				},
+				{
+					"name": "Create rule with only two properties",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"maxNameLength\": 27,\r\n    \"minNameLength\": 15\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/rule",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"rule"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "165"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"a5-vvwD3n9itcA16IYjaKBl9hO8t+0\""
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 16 Nov 2024 18:01:59 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"isActive\": true,\n    \"maxNameLength\": 27,\n    \"minNameLength\": 15,\n    \"createdAt\": \"2024-11-16T18:01:59.941Z\",\n    \"updatedAt\": \"2024-11-16T18:01:59.941Z\",\n    \"id\": \"6738de17e2df6973d2020c5d\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Timestamp (first API)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/matched-events/rules/6738c1d4c4e5533bd7709823/timestamps?beginDate=2024-11-16T19:47:00&endDate=2024-11-16T22:30:00",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"matched-events",
+						"rules",
+						"6738c1d4c4e5533bd7709823",
+						"timestamps"
+					],
+					"query": [
+						{
+							"key": "beginDate",
+							"value": "2024-11-16T19:47:00"
+						},
+						{
+							"key": "endDate",
+							"value": "2024-11-16T22:30:00"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Timestamp",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/matched-events/rules/6738c1d4c4e5533bd7709823/timestamps?beginDate=2024-11-16T19:47:00&endDate=2024-11-16T22:30:00",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"matched-events",
+								"rules",
+								"6738c1d4c4e5533bd7709823",
+								"timestamps"
+							],
+							"query": [
+								{
+									"key": "beginDate",
+									"value": "2024-11-16T19:47:00"
+								},
+								{
+									"key": "endDate",
+									"value": "2024-11-16T22:30:00"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "4275"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"10b3-KQ4TGhteIrrek2NG2e+3ERTNdvw\""
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 16 Nov 2024 18:05:01 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"result\": {\n        \"thisisagent3\": [\n            \"2024-11-16T16:17:08.122Z\",\n            \"2024-11-16T16:17:08.122Z\",\n            \"2024-11-16T16:17:08.122Z\",\n            \"2024-11-16T16:17:08.122Z\",\n            \"2024-11-16T16:17:08.122Z\",\n            \"2024-11-16T16:17:08.122Z\",\n            \"2024-11-16T16:17:08.122Z\",\n            \"2024-11-16T16:17:08.122Z\",\n            \"2024-11-16T16:17:08.122Z\",\n            \"2024-11-16T16:17:08.122Z\",\n            \"2024-11-16T16:17:08.122Z\",\n            \"2024-11-16T16:17:08.122Z\",\n            \"2024-11-16T16:17:08.122Z\",\n            \"2024-11-16T16:17:08.122Z\",\n            \"2024-11-16T16:17:08.122Z\",\n            \"2024-11-16T16:17:08.122Z\",\n            \"2024-11-16T16:17:08.122Z\",\n            \"2024-11-16T16:17:08.122Z\",\n            \"2024-11-16T16:17:18.093Z\",\n            \"2024-11-16T16:17:18.093Z\",\n            \"2024-11-16T16:17:18.093Z\",\n            \"2024-11-16T16:17:18.093Z\",\n            \"2024-11-16T16:17:18.093Z\",\n            \"2024-11-16T16:17:18.093Z\",\n            \"2024-11-16T16:17:18.093Z\",\n            \"2024-11-16T16:17:18.093Z\",\n            \"2024-11-16T16:17:18.093Z\",\n            \"2024-11-16T16:17:18.093Z\",\n            \"2024-11-16T16:17:18.093Z\",\n            \"2024-11-16T16:17:18.093Z\",\n            \"2024-11-16T16:17:18.093Z\",\n            \"2024-11-16T16:17:18.093Z\",\n            \"2024-11-16T16:17:18.093Z\",\n            \"2024-11-16T16:17:18.093Z\",\n            \"2024-11-16T16:17:18.093Z\",\n            \"2024-11-16T16:17:18.093Z\",\n            \"2024-11-16T16:17:18.093Z\",\n            \"2024-11-16T16:17:18.093Z\",\n            \"2024-11-16T16:17:18.093Z\",\n            \"2024-11-16T16:17:18.093Z\",\n            \"2024-11-16T16:17:28.082Z\",\n            \"2024-11-16T16:17:28.082Z\",\n            \"2024-11-16T16:17:28.082Z\",\n            \"2024-11-16T16:17:28.082Z\",\n            \"2024-11-16T16:17:28.082Z\",\n            \"2024-11-16T16:17:28.082Z\",\n            \"2024-11-16T16:17:28.082Z\",\n            \"2024-11-16T16:17:28.082Z\",\n            \"2024-11-16T16:17:28.082Z\",\n            \"2024-11-16T16:17:28.082Z\",\n            \"2024-11-16T16:17:28.082Z\",\n            \"2024-11-16T16:17:28.082Z\",\n            \"2024-11-16T16:17:38.069Z\",\n            \"2024-11-16T16:17:38.069Z\",\n            \"2024-11-16T16:17:38.069Z\",\n            \"2024-11-16T16:17:38.069Z\",\n            \"2024-11-16T16:17:38.069Z\",\n            \"2024-11-16T16:17:38.069Z\",\n            \"2024-11-16T16:17:38.069Z\",\n            \"2024-11-16T16:17:38.069Z\",\n            \"2024-11-16T16:17:38.069Z\",\n            \"2024-11-16T16:17:38.069Z\",\n            \"2024-11-16T16:17:38.069Z\",\n            \"2024-11-16T16:17:38.069Z\",\n            \"2024-11-16T16:17:38.069Z\",\n            \"2024-11-16T16:17:38.069Z\",\n            \"2024-11-16T16:17:38.069Z\",\n            \"2024-11-16T16:17:38.069Z\",\n            \"2024-11-16T16:17:38.069Z\",\n            \"2024-11-16T16:17:48.136Z\",\n            \"2024-11-16T16:17:48.136Z\",\n            \"2024-11-16T16:17:48.136Z\",\n            \"2024-11-16T16:17:48.136Z\",\n            \"2024-11-16T16:17:48.136Z\",\n            \"2024-11-16T16:17:48.136Z\",\n            \"2024-11-16T16:17:48.136Z\",\n            \"2024-11-16T16:17:48.136Z\",\n            \"2024-11-16T16:17:48.136Z\",\n            \"2024-11-16T16:17:48.136Z\",\n            \"2024-11-16T16:17:48.136Z\",\n            \"2024-11-16T16:17:48.136Z\",\n            \"2024-11-16T16:17:48.136Z\",\n            \"2024-11-16T16:17:48.136Z\",\n            \"2024-11-16T16:17:48.136Z\",\n            \"2024-11-16T16:17:48.136Z\",\n            \"2024-11-16T16:17:48.136Z\",\n            \"2024-11-16T16:17:58.184Z\",\n            \"2024-11-16T16:17:58.184Z\",\n            \"2024-11-16T16:17:58.184Z\",\n            \"2024-11-16T16:17:58.184Z\",\n            \"2024-11-16T16:17:58.184Z\",\n            \"2024-11-16T16:17:58.184Z\",\n            \"2024-11-16T16:17:58.184Z\",\n            \"2024-11-16T16:17:58.184Z\",\n            \"2024-11-16T16:17:58.184Z\",\n            \"2024-11-16T16:17:58.184Z\",\n            \"2024-11-16T16:17:58.184Z\",\n            \"2024-11-16T16:17:58.184Z\"\n        ],\n        \"thisisagent2\": [\n            \"2024-11-16T16:17:08.122Z\",\n            \"2024-11-16T16:17:08.122Z\",\n            \"2024-11-16T16:17:08.122Z\",\n            \"2024-11-16T16:17:08.122Z\",\n            \"2024-11-16T16:17:08.122Z\",\n            \"2024-11-16T16:17:08.122Z\",\n            \"2024-11-16T16:17:08.122Z\",\n            \"2024-11-16T16:17:18.093Z\",\n            \"2024-11-16T16:17:18.093Z\",\n            \"2024-11-16T16:17:18.093Z\",\n            \"2024-11-16T16:17:18.093Z\",\n            \"2024-11-16T16:17:18.093Z\",\n            \"2024-11-16T16:17:18.093Z\",\n            \"2024-11-16T16:17:28.082Z\",\n            \"2024-11-16T16:17:28.082Z\",\n            \"2024-11-16T16:17:28.082Z\",\n            \"2024-11-16T16:17:28.082Z\",\n            \"2024-11-16T16:17:28.082Z\",\n            \"2024-11-16T16:17:28.082Z\",\n            \"2024-11-16T16:17:38.069Z\",\n            \"2024-11-16T16:17:38.069Z\",\n            \"2024-11-16T16:17:38.069Z\",\n            \"2024-11-16T16:17:38.069Z\",\n            \"2024-11-16T16:17:38.069Z\",\n            \"2024-11-16T16:17:38.069Z\",\n            \"2024-11-16T16:17:38.069Z\",\n            \"2024-11-16T16:17:38.069Z\",\n            \"2024-11-16T16:17:38.069Z\",\n            \"2024-11-16T16:17:48.136Z\",\n            \"2024-11-16T16:17:48.136Z\",\n            \"2024-11-16T16:17:48.136Z\",\n            \"2024-11-16T16:17:48.136Z\",\n            \"2024-11-16T16:17:48.136Z\",\n            \"2024-11-16T16:17:48.136Z\",\n            \"2024-11-16T16:17:48.136Z\",\n            \"2024-11-16T16:17:48.136Z\",\n            \"2024-11-16T16:17:48.136Z\",\n            \"2024-11-16T16:17:58.184Z\",\n            \"2024-11-16T16:17:58.184Z\",\n            \"2024-11-16T16:17:58.184Z\"\n        ],\n        \"thisisagent1\": [\n            \"2024-11-16T16:17:08.122Z\",\n            \"2024-11-16T16:17:08.122Z\",\n            \"2024-11-16T16:17:08.122Z\",\n            \"2024-11-16T16:17:08.122Z\",\n            \"2024-11-16T16:17:18.093Z\",\n            \"2024-11-16T16:17:18.093Z\",\n            \"2024-11-16T16:17:18.093Z\",\n            \"2024-11-16T16:17:28.082Z\",\n            \"2024-11-16T16:17:28.082Z\",\n            \"2024-11-16T16:17:28.082Z\",\n            \"2024-11-16T16:17:38.069Z\",\n            \"2024-11-16T16:17:38.069Z\",\n            \"2024-11-16T16:17:48.136Z\",\n            \"2024-11-16T16:17:48.136Z\",\n            \"2024-11-16T16:17:48.136Z\",\n            \"2024-11-16T16:17:58.184Z\",\n            \"2024-11-16T16:17:58.184Z\",\n            \"2024-11-16T16:17:58.184Z\"\n        ]\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "Agents (second API)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/matched-events/rules/6738c1d4c4e5533bd7709823/agents",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"matched-events",
+						"rules",
+						"6738c1d4c4e5533bd7709823",
+						"agents"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Agents",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/matched-events/rules/6738c1d4c4e5533bd7709823/agents",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"matched-events",
+								"rules",
+								"6738c1d4c4e5533bd7709823",
+								"agents"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "57"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"39-hPPjpgrTs1CfNqKh5LVDa2JkIDA\""
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 16 Nov 2024 18:04:02 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"result\": [\n        \"thisisagent3\",\n        \"thisisagent2\",\n        \"thisisagent1\"\n    ]\n}"
+				}
+			]
+		}
+	]
+}
