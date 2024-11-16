@@ -5,14 +5,10 @@ import { Transport } from '@nestjs/microservices';
 async function bootstrap() {
   const app = await NestFactory.createMicroservice(AppModule, {
     transport: Transport.RMQ,
-    options: {
-      urls: ['amqp://localhost:5672'],
-    },
   });
 
-  await app.listen().then(() => {
-    console.log('Agent is running');
-  });
+  await app.listen();
+  console.log('==> Agent is running');
 }
 
 bootstrap();
