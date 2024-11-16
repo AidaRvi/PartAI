@@ -98,7 +98,15 @@ export class MatchedEventsService {
     return rules;
   }
 
-  async saveMatchedEventsAndRules(data: MatchedEvent[]): Promise<void> {
-    this.matchedEventRepository.insertMany(data);
+  async saveMatchedEventsAndRules(
+    data: Pick<MatchedEvent, 'agentId' | 'eventId' | 'ruleId'>[],
+  ): Promise<void> {
+    const enrichedData = data.map((event) => ({
+      ...event,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    }));
+
+    this.matchedEventRepository.insertMany(enrichedData);
   }
 }

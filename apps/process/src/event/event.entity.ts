@@ -5,6 +5,8 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   ObjectIdColumn,
+  BeforeInsert,
+  BeforeUpdate,
 } from 'typeorm';
 
 @Entity()
@@ -21,9 +23,20 @@ export class Event {
   @Column({ type: String })
   agentId: string;
 
-  @CreateDateColumn({ default: new Date() }) // TODO
+  @CreateDateColumn()
   createdAt?: Date;
 
-  @UpdateDateColumn({ default: new Date() })
+  @UpdateDateColumn()
   updatedAt?: Date;
+
+  @BeforeInsert()
+  setCreationDate(): void {
+    this.createdAt = new Date();
+    this.updatedAt = new Date();
+  }
+
+  @BeforeUpdate()
+  updateDate(): void {
+    this.updatedAt = new Date();
+  }
 }

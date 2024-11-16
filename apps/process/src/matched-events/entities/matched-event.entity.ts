@@ -1,5 +1,7 @@
 import { ObjectId } from 'mongodb';
 import {
+  BeforeInsert,
+  BeforeUpdate,
   Column,
   CreateDateColumn,
   Entity,
@@ -26,4 +28,15 @@ export class MatchedEvent {
 
   @UpdateDateColumn()
   updatedAt?: Date;
+
+  @BeforeInsert()
+  setCreationDate(): void {
+    this.createdAt = new Date();
+    this.updatedAt = new Date();
+  }
+
+  @BeforeUpdate()
+  updateDate(): void {
+    this.updatedAt = new Date();
+  }
 }

@@ -16,11 +16,13 @@ export class EventsService implements OnModuleInit {
     private readonly matchedEventService: MatchedEventsService,
   ) {}
 
-  async saveEvents(EventsData: EventDataDto[]): Promise<void> {
-    const events: Event[] = EventsData.map((item) => ({
-      agentId: item.agentId,
-      name: item.event.name,
-      value: item.event.value,
+  async saveEvents(
+    data: Pick<Event, 'agentId' | 'name' | 'value'>[],
+  ): Promise<void> {
+    const events = data.map((event) => ({
+      ...event,
+      createdAt: new Date(),
+      updatedAt: new Date(),
     }));
     await this.eventRepository.insertMany(events);
   }
@@ -49,7 +51,15 @@ export class EventsService implements OnModuleInit {
       console.log('No new events to handle');
       return;
     }
-    await this.saveEvents(eventsData);
+
+    const events: Pick<Event, 'agentId' | 'name' | 'value'>[] = eventsData.map(
+      (item) => ({
+        agentId: item.agentId,
+        name: item.event.name,
+        value: item.event.value,
+      }),
+    );
+    await this.saveEvents(events);
 
     this.matchedEventService.compareEventsHandler(eventsData);
   }
