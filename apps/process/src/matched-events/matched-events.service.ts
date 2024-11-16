@@ -1,15 +1,14 @@
 import { forwardRef, Inject, Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
 import { EventDataDto } from 'src/event/DTOs/event.dto';
 import { EventsService } from 'src/event/event.service';
 import { RedisService } from 'src/redis/redis.service';
 import { Rule } from 'src/rule/entities/rule.entity';
-import { MongoRepository } from 'typeorm';
-import { MatchedEvent } from './entities/matched-event.entity';
 import { ObjectId } from 'mongodb';
 import { DayRangeDto } from './DTOs/get-timestamps-day-range.dto';
 import { GetTimestampsDto } from './DTOs/get-timestamps.dto';
 import { RuleService } from 'src/rule/rule.service';
+import { GetAgentsDto } from './DTOs/get-agents.dto';
+import { MatchedEventsRepository } from './matched-events.repository';
 
 @Injectable()
 export class MatchedEventsService {
@@ -18,9 +17,8 @@ export class MatchedEventsService {
     private readonly eventService: EventsService,
     @Inject(forwardRef(() => RuleService))
     private readonly ruleService: RuleService,
-    @InjectRepository(MatchedEvent)
-    private readonly matchedEventRepository: MongoRepository<MatchedEvent>,
     private readonly redisService: RedisService,
+    private readonly matchedEventRepository: MatchedEventsRepository,
   ) {}
 
   async compareEventsHandler(eventsData: EventDataDto[]) {
@@ -68,8 +66,7 @@ export class MatchedEventsService {
       agentId: event.agentId,
     }));
 
-    this.saveMatchedEventsAndRules(matchedData);
-    console.log(matchedData);
+    this.matchedEventRepository.saveMatchedEventsAndRules(matchedData);
   }
 
   areEventAndRuleMatched(rule: Rule, eventData: EventDataDto): boolean {
@@ -103,18 +100,6 @@ export class MatchedEventsService {
     return rules;
   }
 
-  async saveMatchedEventsAndRules(
-    data: Pick<MatchedEvent, 'agentId' | 'eventId' | 'ruleId'>[],
-  ): Promise<void> {
-    const enrichedData = data.map((event) => ({
-      ...event,
-      createdAt: new Date(),
-      updatedAt: new Date(),
-    }));
-
-    this.matchedEventRepository.insertMany(enrichedData);
-  }
-
   async getTimestampsHandler(
     ruleId: string,
     getTimestampsDto: DayRangeDto,
@@ -122,34 +107,10 @@ export class MatchedEventsService {
     const rule = await this.ruleService.findOne(ruleId);
     if (!rule) throw new Error('rule not found');
 
-    const beginDate = getTimestampsDto.beginDate;
-    const endDate = getTimestampsDto.endDate;
-
-    const pipeline = [
-      {
-        $match: {
-          createdAt: { $gte: beginDate, $lte: endDate },
-          ruleId: new ObjectId(ruleId),
-        },
-      },
-      {
-        $project: {
-          agentId: 1,
-          createdAt: 1,
-          _id: 0,
-        },
-      },
-      {
-        $group: {
-          _id: '$agentId',
-          dates: { $push: '$createdAt' },
-        },
-      },
-    ];
-
-    const agentsData = (await this.matchedEventRepository
-      .aggregate(pipeline)
-      .toArray()) as unknown as { _id: string; dates: Date[] }[];
+    const agentsData = await this.matchedEventRepository.getAgentsDatesByRule(
+      ruleId,
+      getTimestampsDto,
+    );
 
     const agents = agentsData.map((agent) => ({
       [`${agent._id}`]: agent.dates,
