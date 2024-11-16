@@ -109,7 +109,7 @@ export class MatchedEventsService {
     ruleId: string,
     getTimestampsDto: DayRangeDto,
   ): Promise<GetTimestampsDto> {
-    const rule = await this.ruleService.findOne(ruleId);
+    const rule = await this.ruleService.findOneHandler(ruleId);
     if (!rule) throw new Error('rule not found');
 
     const agentsData = await this.matchedEventRepository.getAgentsDatesByRule(
@@ -126,7 +126,7 @@ export class MatchedEventsService {
   }
 
   async getAgentsHandler(ruleId: string): Promise<GetAgentsDto> {
-    const rule = await this.ruleService.findOne(ruleId);
+    const rule = await this.ruleService.findOneHandler(ruleId);
     if (!rule) throw new Error('rule not found');
 
     const agentsData =

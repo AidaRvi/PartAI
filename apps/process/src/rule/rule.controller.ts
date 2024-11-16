@@ -21,17 +21,17 @@ export class RuleController {
 
   @Post()
   create(@Body() createRuleDto: CreateRuleDto): Promise<Rule> {
-    return this.ruleService.create(createRuleDto);
+    return this.ruleService.createHandler(createRuleDto);
   }
 
   @Get()
   findAll(@Query() paginationData: PaginationDto): Promise<FindAllOutput> {
-    return this.ruleService.findAll(paginationData);
+    return this.ruleService.findAllHandler(paginationData);
   }
 
   @Get(':id')
   findOne(@Param('id') id: string): Promise<Rule> {
-    return this.ruleService.findOne(id);
+    return this.ruleService.findOneHandler(id);
   }
 
   @Patch(':id')
@@ -39,11 +39,11 @@ export class RuleController {
     @Param('id') id: string,
     @Body() updateRuleDto: UpdateRuleDto,
   ): Promise<Rule> {
-    return this.ruleService.update(id, updateRuleDto);
+    return this.ruleService.updateHandler(id, updateRuleDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string): Promise<void> {
-    return this.ruleService.remove(id);
+    return this.ruleService.removeHandler(id);
   }
 }
