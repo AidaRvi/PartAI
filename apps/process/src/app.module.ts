@@ -13,6 +13,7 @@ import { RedisModule } from './redis/redis.module';
 @Module({
   imports: [
     EventsModule,
+    MatchedEventsModule,
     ConfigModule.forRoot({
       isGlobal: true,
       load: [configurations],
@@ -32,7 +33,6 @@ import { RedisModule } from './redis/redis.module';
     }),
     RedisModule,
     RuleModule,
-    MatchedEventsModule,
   ],
   controllers: [],
   providers: [],

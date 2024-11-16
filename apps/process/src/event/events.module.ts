@@ -1,12 +1,17 @@
-import { Module } from '@nestjs/common';
+import { forwardRef, Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { EventConsumerController } from './event-consumer.controller';
 import { Event } from './event.entity';
 import { EventsService } from './event.service';
+import { MatchedEventsModule } from 'src/matched-events/matched-events.module';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Event])],
+  imports: [
+    forwardRef(() => MatchedEventsModule),
+    TypeOrmModule.forFeature([Event]),
+  ],
   controllers: [EventConsumerController],
   providers: [EventsService],
+  exports: [EventsService],
 })
 export class EventsModule {}
