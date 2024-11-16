@@ -23,8 +23,13 @@ export class MatchedEventsService {
 
   async compareEventsHandler(eventsData: EventDataDto[]) {
     const rules = await this.getRulesFromRedis();
-    if (!rules.length) {
-      console.log('There are no rules in redis'); // TODO: handle missed events
+    if (!rules || !rules.length) {
+      console.log('There are no rules in redis');
+
+      eventsData.forEach((eventData) => {
+        this.eventService.saveEventToRedis(eventData);
+      });
+
       return;
     }
 
