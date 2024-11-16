@@ -6,6 +6,7 @@ import { ConfigService } from '@nestjs/config';
 @Injectable()
 export class EventPublisherService implements OnModuleInit {
   private agentId: string;
+  private eventGenerationDuration: number;
 
   constructor(
     private readonly eventGeneratorService: EventGeneratorService,
@@ -13,6 +14,9 @@ export class EventPublisherService implements OnModuleInit {
     private configService: ConfigService,
   ) {
     this.agentId = this.configService.get<string>('agentId');
+    this.eventGenerationDuration = this.configService.get<number>(
+      'eventGenerationDuration',
+    );
   }
 
   async publishMessage() {
@@ -26,6 +30,6 @@ export class EventPublisherService implements OnModuleInit {
   onModuleInit() {
     setInterval(() => {
       this.publishMessage();
-    }, 500);
+    }, this.eventGenerationDuration);
   }
 }
