@@ -1,0 +1,109 @@
+version: "3.8"
+
+services:
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+    networks:
+      - app-network
+
+  mongodb:
+    image: mongo:6.0
+    container_name: mongodb
+    restart: always
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+    networks:
+      - app-network
+
+  redis:
+    image: redis:7
+    container_name: redis
+    restart: always
+    ports:
+      - "6379:6379"
+    command: ["redis-server", "--appendonly", "yes"]
+    networks:
+      - app-network
+
+  process:
+    build:
+      context: ../apps/process
+      dockerfile: Dockerfile
+    container_name: process
+    ports:
+      - "3000:3000"
+    depends_on:
+      - rabbitmq
+      - redis
+      - mongodb
+    environment:
+      RABBITMQ_URL: amqp://rabbitmq
+      RABBITMQ_QUEUE: events
+      MONGODB_HOST: mongodb://mongodb
+      MONGODB_PORT: 27017
+      MONGODB_NAME: PartAI
+      PORT: 3000
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+    networks:
+      - app-network
+
+  agent1:
+    build:
+      context: ../apps/agent
+      dockerfile: Dockerfile
+    container_name: agent1
+    depends_on:
+      - rabbitmq
+    environment:
+      RABBITMQ_URL: amqp://rabbitmq
+      RABBITMQ_QUEUE: events
+      AGENT_ID: thisisagent1
+      EVENT_DURATION: 1000
+    networks:
+      - app-network
+
+  agent2:
+    build:
+      context: ../apps/agent
+      dockerfile: Dockerfile
+    container_name: agent2
+    depends_on:
+      - rabbitmq
+    environment:
+      RABBITMQ_URL: amqp://rabbitmq
+      RABBITMQ_QUEUE: events
+      AGENT_ID: thisisagent2
+      EVENT_DURATION: 500
+    networks:
+      - app-network
+
+  agent3:
+    build:
+      context: ../apps/agent
+      dockerfile: Dockerfile
+    container_name: agent3
+    depends_on:
+      - rabbitmq
+    environment:
+      RABBITMQ_URL: amqp://rabbitmq
+      RABBITMQ_QUEUE: events
+      AGENT_ID: thisisagent3
+      EVENT_DURATION: 200
+    networks:
+      - app-network
+
+volumes:
+  mongodb_data:
+
+networks:
+  app-network:
